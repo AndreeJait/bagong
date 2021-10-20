@@ -13,3 +13,11 @@
    ```
    bagong template list --name project_name --folder template_folder --dest folderdestination
    ```
+   - delete base
+   ```
+   bagong template delete --name project_name
+   ```
+   - edit base
+   ```
+   bagong template edit --name project_name --value template_location
+   ```

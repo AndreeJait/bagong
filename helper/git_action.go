@@ -1,12 +1,31 @@
 package helper
 
-// r, err := git.PlainClone("/tmp/foo", false, &git.CloneOptions{
-// 	URL:      "https://github.com/go-git/go-git",
-// 	Progress: os.Stdout,
-// })
+import (
+	"fmt"
+	"os"
 
-// if err != nil {
-// 	panic(err)
-// }
+	"gopkg.in/src-d/go-git.v4"
+)
 
-// fmt.Println(r)
+func CloneGit(repo, destination string) (repository *git.Repository, err error) {
+	username, err := GoDotEnvVariable("GIT_USERNAME")
+	if err != nil {
+		return nil, err
+	}
+	password, err := GoDotEnvVariable("GIT_TOKEN")
+	if err != nil {
+		return nil, err
+	}
+
+	url := fmt.Sprintf("https://%s:%s@%s", username, password, repo)
+	options := git.CloneOptions{
+		URL:      url,
+		Progress: os.Stdout,
+	}
+	r, err := git.PlainClone(destination, false, &options)
+
+	if err != nil {
+		return nil, err
+	}
+	return r, err
+}

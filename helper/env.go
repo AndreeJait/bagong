@@ -19,7 +19,7 @@ func GetBaseBagong() (string, error) {
 	return baseFile, nil
 }
 
-func goDotEnvVariable(key string) (string, error) {
+func GoDotEnvVariable(key string) (string, error) {
 
 	// load .env file
 	baseFile := os.Getenv("BASE_BAGONG")
